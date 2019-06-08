@@ -30,6 +30,7 @@ class ATLauncherAdapter extends AbstractAdapter {
         }
         $data['name'] = isset($result['name']) ? $result['name'] : $result['email'];
         $data['mail'] = $result['email'];
+        $data['grps'] = $result['grps'];
 
         return $data;
     }
