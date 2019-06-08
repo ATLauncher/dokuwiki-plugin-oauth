@@ -129,14 +129,6 @@ abstract class AbstractAdapter {
             }
         }
 
-        $validDomains = $this->hlp->getValidDomains();
-        if (count($validDomains) > 0) {
-            $userData = $this->getUser();
-            if (!$this->hlp->checkMail($userData['mail'])) {
-                msg(sprintf($this->hlp->getLang("rejectedEMail"),join(', ', $validDomains)),-1);
-                send_redirect(wl('', array('do' => 'login',),false,'&'));
-            }
-        }
         return true;
     }
 

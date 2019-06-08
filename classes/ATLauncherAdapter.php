@@ -2,7 +2,7 @@
 
 namespace OAuth\Plugin;
 
-use OAuth\OAuth2\Service\Generic;
+use OAuth\OAuth2\Service\ATLauncher;
 
 class ATLauncherAdapter extends AbstractAdapter {
 
@@ -40,7 +40,7 @@ class ATLauncherAdapter extends AbstractAdapter {
      * @return array
      */
     public function getScope() {
-        return array('id');
+        return array(ATLauncher::SCOPE_ID);
     }
 
 }
