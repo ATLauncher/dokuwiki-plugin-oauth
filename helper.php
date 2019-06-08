@@ -85,8 +85,7 @@ class helper_plugin_oauthatlauncher extends DokuWiki_Plugin {
      * @return string
      */
     public function getKey($service) {
-        $service = strtolower($service);
-        return $this->getConf($service.'-key');
+        return $this->getConf('client-key');
     }
 
     /**
@@ -97,7 +96,7 @@ class helper_plugin_oauthatlauncher extends DokuWiki_Plugin {
      */
     public function getSecret($service) {
         $service = strtolower($service);
-        return $this->getConf($service.'-secret');
+        return $this->getConf('client-secret');
     }
 
     /**
