@@ -1,4 +1,4 @@
-base   oauth-atlauncher
+base   oauthatlauncher
 author Ryan Dowling
 email  ryan.dowling@atlauncher.com
 date   2019-06-08
