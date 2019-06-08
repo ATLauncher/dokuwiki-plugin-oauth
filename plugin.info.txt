@@ -1,7 +1,7 @@
-base   oauth
-author Andreas Gohr
-email  dokuwiki@cosmocode.de
-date   2019-05-15
-name   oauth plugin
-desc   Generic oAuth plugin to login via various services
-url    http://www.dokuwiki.org/plugin:oauth
+base   oauth-atlauncher
+author Ryan Dowling
+email  ryan.dowling@atlauncher.com
+date   2019-06-08
+name   oauth plugin for ATLauncher
+desc   oAuth plugin to login via ATLauncher
+url    https://www.atlauncher.com

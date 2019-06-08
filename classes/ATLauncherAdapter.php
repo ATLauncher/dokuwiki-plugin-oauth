@@ -2,9 +2,9 @@
 
 namespace OAuth\Plugin;
 
-use OAuth\OAuth2\Service\Auth0;
+use OAuth\OAuth2\Service\Generic;
 
-class Auth0Adapter extends AbstractAdapter {
+class ATLauncherAdapter extends AbstractAdapter {
 
     /**
      * Retrieve the user's data
@@ -17,7 +17,7 @@ class Auth0Adapter extends AbstractAdapter {
         $JSON = new \JSON(JSON_LOOSE_TYPE);
         $data = array();
 
-        $response = $this->oAuth->request('/userinfo');
+        $response = $this->oAuth->request('/oauth/me');
         $result = $JSON->decode($response);
 
         if( !empty($result['username']) )
@@ -40,7 +40,7 @@ class Auth0Adapter extends AbstractAdapter {
      * @return array
      */
     public function getScope() {
-        return array(Auth0::SCOPE_OPENID);
+        return array('id');
     }
 
 }
