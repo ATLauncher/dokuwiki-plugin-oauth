@@ -21,7 +21,7 @@ abstract class AbstractAdapter {
 
     /** @var \OAuth\Common\Service\AbstractService|\OAuth\OAuth2\Service\AbstractService|\OAuth\OAuth2\Service\AbstractService */
     public $oAuth = null;
-    /** @var \helper_plugin_oauth */
+    /** @var \helper_plugin_oauthatlauncher */
     protected $hlp = null;
     /** @var \OAuth\Plugin\oAuthStorage */
     protected $storage = null;
@@ -32,7 +32,7 @@ abstract class AbstractAdapter {
      * @param $url
      */
     public function __construct($url) {
-        $this->hlp = plugin_load('helper', 'oauth');
+        $this->hlp = plugin_load('helper', 'oauthatlauncher');
 
         $credentials = new Credentials(
             $this->hlp->getKey($this->getAdapterName()),

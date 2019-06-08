@@ -26,7 +26,7 @@ class Auth0 extends AbstractService
     ) {
         parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
 
-        $hlp = plugin_load('helper', 'oauth');
+        $hlp = plugin_load('helper', 'oauthatlauncher');
         $this->domain = $hlp->getConf('auth0-domain');
 
         if (null === $baseApiUri) {
@@ -71,7 +71,7 @@ class Auth0 extends AbstractService
 
         $token = new StdOAuth2Token();
         $token->setAccessToken($data['access_token']);
-        
+
         if (isset($data['expires'])) {
             $token->setLifeTime($data['expires']);
         }

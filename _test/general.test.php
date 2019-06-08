@@ -24,7 +24,7 @@ class general_plugin_oauth_test extends DokuWikiTest {
         $this->assertArrayHasKey('desc', $info);
         $this->assertArrayHasKey('url', $info);
 
-        $this->assertEquals('oauth', $info['base']);
+        $this->assertEquals('oauthatlauncher', $info['base']);
         $this->assertRegExp('/^https?:\/\//', $info['url']);
         $this->assertTrue(mail_isvalid($info['email']));
         $this->assertRegExp('/^\d\d\d\d-\d\d-\d\d$/', $info['date']);

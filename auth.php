@@ -9,7 +9,7 @@
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
-class auth_plugin_oauth extends auth_plugin_authplain {
+class auth_plugin_oauthatlauncher extends auth_plugin_authplain {
 
     /**
      * Constructor
@@ -60,8 +60,8 @@ class auth_plugin_oauth extends auth_plugin_authplain {
 
         // check session for existing oAuth login data
         $session = $_SESSION[DOKU_COOKIE]['auth'];
-        if(isset($session['oauth'])) {
-            $servicename = $session['oauth'];
+        if(isset($session['oauthatlauncher'])) {
+            $servicename = $session['oauthatlauncher'];
             // check if session data is still considered valid
             if ($this->isSessionValid($session)) {
                 $_SERVER['REMOTE_USER'] = $session['user'];
@@ -72,19 +72,19 @@ class auth_plugin_oauth extends auth_plugin_authplain {
 
         $existingLoginProcess = false;
         // are we in login progress?
-        if(isset($_SESSION[DOKU_COOKIE]['oauth-inprogress'])) {
-            $servicename = $_SESSION[DOKU_COOKIE]['oauth-inprogress']['service'];
-            $page        = $_SESSION[DOKU_COOKIE]['oauth-inprogress']['id'];
-            $params      = $_SESSION[DOKU_COOKIE]['oauth-inprogress']['params'];
+        if(isset($_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress'])) {
+            $servicename = $_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress']['service'];
+            $page        = $_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress']['id'];
+            $params      = $_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress']['params'];
 
-            unset($_SESSION[DOKU_COOKIE]['oauth-inprogress']);
+            unset($_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress']);
             $existingLoginProcess = true;
         }
 
         // either we're in oauth login or a previous log needs to be rechecked
         if(isset($servicename)) {
-            /** @var helper_plugin_oauth $hlp */
-            $hlp     = plugin_load('helper', 'oauth');
+            /** @var helper_plugin_oauthatlauncher $hlp */
+            $hlp     = plugin_load('helper', 'oauthatlauncher');
 
             /** @var OAuth\Plugin\AbstractAdapter $service */
             $service = $hlp->loadService($servicename);
@@ -120,7 +120,7 @@ class auth_plugin_oauth extends auth_plugin_authplain {
             $cookieuser = base64_decode($cookieuser, true);
             $auth = base64_decode($auth, true);
             $servicename = base64_decode($servicename, true);
-            if ($auth === 'oauth') {
+            if ($auth === 'oauthatlauncher') {
                 $this->relogin($servicename);
             }
         }
@@ -135,8 +135,8 @@ class auth_plugin_oauth extends auth_plugin_authplain {
      * @return bool
      */
     protected function isSessionValid ($session) {
-        /** @var helper_plugin_oauth $hlp */
-        $hlp     = plugin_load('helper', 'oauth');
+        /** @var helper_plugin_oauthatlauncher $hlp */
+        $hlp     = plugin_load('helper', 'oauthatlauncher');
         if ($hlp->validBrowserID($session)) {
             if (!$hlp->isSessionTimedOut($session)) {
                 return true;
@@ -151,18 +151,18 @@ class auth_plugin_oauth extends auth_plugin_authplain {
     protected function relogin($servicename) {
         global $INPUT;
 
-        /** @var helper_plugin_oauth $hlp */
-        $hlp     = plugin_load('helper', 'oauth');
+        /** @var helper_plugin_oauthatlauncher $hlp */
+        $hlp     = plugin_load('helper', 'oauthatlauncher');
         $service     = $hlp->loadService($servicename);
         if(is_null($service)) return false;
 
         // remember service in session
         session_start();
-        $_SESSION[DOKU_COOKIE]['oauth-inprogress']['service'] = $servicename;
-        $_SESSION[DOKU_COOKIE]['oauth-inprogress']['id']      = $INPUT->str('id');
-        $_SESSION[DOKU_COOKIE]['oauth-inprogress']['params']  = $_GET;
+        $_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress']['service'] = $servicename;
+        $_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress']['id']      = $INPUT->str('id');
+        $_SESSION[DOKU_COOKIE]['oauthatlauncher-inprogress']['params']  = $_GET;
 
-        $_SESSION[DOKU_COOKIE]['oauth-done']['$_REQUEST'] = $_REQUEST;
+        $_SESSION[DOKU_COOKIE]['oauthatlauncher-done']['$_REQUEST'] = $_REQUEST;
 
         if (is_array($INPUT->post->param('do'))) {
             $doPost = key($INPUT->post->arr('do'));
@@ -171,9 +171,9 @@ class auth_plugin_oauth extends auth_plugin_authplain {
         }
         $doGet = $INPUT->get->str('do');
         if (!empty($doPost)) {
-            $_SESSION[DOKU_COOKIE]['oauth-done']['do'] = $doPost;
+            $_SESSION[DOKU_COOKIE]['oauthatlauncher-done']['do'] = $doPost;
         } elseif (!empty($doGet)) {
-            $_SESSION[DOKU_COOKIE]['oauth-done']['do'] = $doGet;
+            $_SESSION[DOKU_COOKIE]['oauthatlauncher-done']['do'] = $doGet;
         }
 
         session_write_close();
@@ -326,7 +326,7 @@ class auth_plugin_oauth extends auth_plugin_authplain {
         $_SESSION[DOKU_COOKIE]['auth']['info']  = $USERINFO;
         $_SESSION[DOKU_COOKIE]['auth']['buid']  = auth_browseruid();
         $_SESSION[DOKU_COOKIE]['auth']['time']  = time();
-        $_SESSION[DOKU_COOKIE]['auth']['oauth'] = $service;
+        $_SESSION[DOKU_COOKIE]['auth']['oauthatlauncher'] = $service;
     }
 
     /**
@@ -336,7 +336,7 @@ class auth_plugin_oauth extends auth_plugin_authplain {
      * @param int    $validityPeriodInSeconds optional, per default 1 Year
      */
     private function setUserCookie($user, $sticky, $servicename, $validityPeriodInSeconds = 31536000) {
-        $cookie = base64_encode($user).'|'.((int) $sticky).'|'.base64_encode('oauth').'|'.base64_encode($servicename);
+        $cookie = base64_encode($user).'|'.((int) $sticky).'|'.base64_encode('oauthatlauncher').'|'.base64_encode($servicename);
         $cookieDir = empty($conf['cookiedir']) ? DOKU_REL : $conf['cookiedir'];
         $time      = $sticky ? (time() + $validityPeriodInSeconds) : 0;
         setcookie(DOKU_COOKIE,$cookie, $time, $cookieDir, '',($conf['securecookie'] && is_ssl()), true);
@@ -355,8 +355,8 @@ class auth_plugin_oauth extends auth_plugin_authplain {
      * unset auth cookies and session information
      */
     private function cleanLogout() {
-        if(isset($_SESSION[DOKU_COOKIE]['oauth-done'])) {
-            unset($_SESSION[DOKU_COOKIE]['oauth-done']);
+        if(isset($_SESSION[DOKU_COOKIE]['oauthatlauncher-done'])) {
+            unset($_SESSION[DOKU_COOKIE]['oauthatlauncher-done']);
         }
         if(isset($_SESSION[DOKU_COOKIE]['auth'])) {
             unset($_SESSION[DOKU_COOKIE]['auth']);

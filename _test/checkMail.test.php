@@ -7,15 +7,15 @@
  */
 class checkMail_plugin_oauth_test extends DokuWikiTest {
 
-    protected $pluginsEnabled = array('oauth');
+    protected $pluginsEnabled = array('oauthatlauncher');
 
     public function test_checkMail_twoDomains() {
 
         global $conf;
-        $conf['plugin']['oauth']['mailRestriction'] = '@foo.org,@example.com';
+        $conf['plugin']['oauthatlauncher']['mailRestriction'] = '@foo.org,@example.com';
 
         /** @var helper_plugin_oauth $hlp */
-        $hlp     = plugin_load('helper', 'oauth');
+        $hlp     = plugin_load('helper', 'oauthatlauncher');
 
         $testmail = "bar@foo.org";
         $this->assertTrue($hlp->checkMail($testmail),$testmail);
@@ -28,10 +28,10 @@ class checkMail_plugin_oauth_test extends DokuWikiTest {
     public function test_checkMail_oneDomains() {
 
         global $conf;
-        $conf['plugin']['oauth']['mailRestriction'] = '@foo.org';
+        $conf['plugin']['oauthatlauncher']['mailRestriction'] = '@foo.org';
 
         /** @var helper_plugin_oauth $hlp */
-        $hlp     = plugin_load('helper', 'oauth');
+        $hlp     = plugin_load('helper', 'oauthatlauncher');
 
         $testmail = "bar@foo.org";
         $this->assertTrue($hlp->checkMail($testmail),$testmail);

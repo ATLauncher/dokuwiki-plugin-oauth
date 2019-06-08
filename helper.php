@@ -9,7 +9,7 @@
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
-class helper_plugin_oauth extends DokuWiki_Plugin {
+class helper_plugin_oauthatlauncher extends DokuWiki_Plugin {
 
     /**
      * Load the needed libraries and initialize the named oAuth service
