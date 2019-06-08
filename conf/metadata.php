@@ -26,6 +26,6 @@ class setting_plugin_oauthatlauncher extends setting {
 }
 
 $meta['info']                = array('plugin_oauthatlauncher');
-$meta['client-id']           = array('string');
+$meta['client-key']           = array('string');
 $meta['client-secret']       = array('string');
 $meta['redirect-uri']        = array('string');

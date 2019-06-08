@@ -8,5 +8,5 @@
 
 $lang['info']            = 'Redirect URI to use when configuring the applications';
 $lang['custom-redirectURI'] = 'Use the following custom redirect URI';
-$lang['client-id']       = 'The Client ID';
+$lang['client-key']       = 'The Client ID';
 $lang['client-secret']   = 'The Client Secret';

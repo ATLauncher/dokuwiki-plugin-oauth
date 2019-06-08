@@ -5,6 +5,6 @@
  * @author Andreas Gohr <andi@splitbrain.org>
  */
 
-$conf['client-id']           = '';
+$conf['client-key']           = '';
 $conf['client-secret']       = '';
 $conf['redirect-uri']        = '';

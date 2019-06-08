@@ -36,7 +36,7 @@ class helper_plugin_oauthatlauncher extends DokuWiki_Plugin {
         /** @var \OAuth\Plugin\AbstractAdapter $service */
         $service = new $class($this->redirectURI());
         if(!$service->isInitialized()) {
-            msg("Failed to initialize $service authentication service. Check credentials", -1);
+            msg("Failed to initialize $servicename authentication service. Check credentials", -1);
             return null;
         }
 
