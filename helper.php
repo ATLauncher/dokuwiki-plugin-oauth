@@ -55,11 +55,7 @@ class helper_plugin_oauthatlauncher extends DokuWiki_Plugin {
      * @return string
      */
     public function redirectURI() {
-        if ($this->getConf('custom-redirectURI') !== '') {
-            return $this->getConf('custom-redirectURI');
-        } else {
-            return DOKU_URL . DOKU_SCRIPT;
-        }
+        return DOKU_URL . DOKU_SCRIPT;
     }
 
     /**
