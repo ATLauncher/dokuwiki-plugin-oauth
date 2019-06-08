@@ -29,3 +29,4 @@ $meta['info']                = array('plugin_oauthatlauncher');
 $meta['client-key']           = array('string');
 $meta['client-secret']       = array('string');
 $meta['redirect-uri']        = array('string');
+$meta['register-on-auth']    = array('onoff','_caution' => 'security');

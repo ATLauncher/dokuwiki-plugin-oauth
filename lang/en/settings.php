@@ -9,3 +9,4 @@
 $lang['info']            = 'Redirect URI to use when configuring the applications';
 $lang['client-key']       = 'The Client ID';
 $lang['client-secret']   = 'The Client Secret';
+$lang['register-on-auth'] = 'Register authenticated users even if self-registration is disabled in main configuration';
