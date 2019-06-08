@@ -7,5 +7,4 @@
 
 $conf['client-key']           = '';
 $conf['client-secret']       = '';
-$conf['redirect-uri']        = '';
 $conf['register-on-auth']    = 0;
