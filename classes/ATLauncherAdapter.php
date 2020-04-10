@@ -17,7 +17,7 @@ class ATLauncherAdapter extends AbstractAdapter {
         $JSON = new \JSON(JSON_LOOSE_TYPE);
         $data = array();
 
-        $response = $this->oAuth->request('/oauth/me');
+        $response = $this->oAuth->request('https://atlauncher.com/admin/oauth/me');
         $result = $JSON->decode($response);
 
         if( !empty($result['username']) )

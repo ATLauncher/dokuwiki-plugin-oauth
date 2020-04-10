@@ -26,7 +26,7 @@ class ATLauncher extends AbstractService
         parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
 
         if (null === $baseApiUri) {
-            $this->baseApiUri = new Uri('https://admin.atlauncher.com/');
+            $this->baseApiUri = new Uri('https://atlauncher.com/admin/oauth');
         }
     }
 
@@ -35,7 +35,7 @@ class ATLauncher extends AbstractService
      */
     protected function getAuthorizationMethod()
     {
-        return static::AUTHORIZATION_METHOD_QUERY_STRING;
+        return static::AUTHORIZATION_METHOD_HEADER_BEARER;
     }
 
     /**
@@ -43,7 +43,7 @@ class ATLauncher extends AbstractService
      */
     public function getAuthorizationEndpoint()
     {
-        return new Uri('https://admin.atlauncher.com/oauth/authorize');
+        return new Uri('https://atlauncher.com/admin/oauth/authorize');
     }
 
     /**
@@ -51,7 +51,7 @@ class ATLauncher extends AbstractService
      */
     public function getAccessTokenEndpoint()
     {
-        return new Uri('https://admin.atlauncher.com/oauth/access_token');
+        return new Uri('https://atlauncher.com/admin/oauth/token');
     }
 
     /**
@@ -70,8 +70,8 @@ class ATLauncher extends AbstractService
         $token = new StdOAuth2Token();
         $token->setAccessToken($data['access_token']);
 
-        if (isset($data['expires'])) {
-            $token->setLifeTime($data['expires']);
+        if (isset($data['expires_in'])) {
+            $token->setLifeTime($data['expires_in']);
         }
 
         if (isset($data['refresh_token'])) {
@@ -80,7 +80,7 @@ class ATLauncher extends AbstractService
         }
 
         unset($data['access_token']);
-        unset($data['expires']);
+        unset($data['expires_in']);
 
         $token->setExtraParams($data);
 
