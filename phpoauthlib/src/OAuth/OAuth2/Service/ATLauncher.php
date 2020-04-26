@@ -26,7 +26,7 @@ class ATLauncher extends AbstractService
         parent::__construct($credentials, $httpClient, $storage, $scopes, $baseApiUri);
 
         if (null === $baseApiUri) {
-            $this->baseApiUri = new Uri('https://atlauncher.com/admin/oauth');
+            $this->baseApiUri = new Uri('https://atlauncher.com/oauth');
         }
     }
 
@@ -43,7 +43,7 @@ class ATLauncher extends AbstractService
      */
     public function getAuthorizationEndpoint()
     {
-        return new Uri('https://atlauncher.com/admin/oauth/authorize');
+        return new Uri('https://atlauncher.com/oauth/authorize');
     }
 
     /**
@@ -51,7 +51,7 @@ class ATLauncher extends AbstractService
      */
     public function getAccessTokenEndpoint()
     {
-        return new Uri('https://atlauncher.com/admin/oauth/token');
+        return new Uri('https://atlauncher.com/oauth/token');
     }
 
     /**

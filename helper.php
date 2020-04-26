@@ -42,8 +42,8 @@ class helper_plugin_oauthatlauncher extends DokuWiki_Plugin {
 
         // The generic service can be externally configured
         if(is_a($service->oAuth, 'OAuth\\OAuth2\\Service\\Generic')) {
-            $service->oAuth->setAuthorizationEndpoint("https://atlauncher.com/admin/oauth/authorize");
-            $service->oAuth->setAccessTokenEndpoint("https://atlauncher.com/admin/oauth/token");
+            $service->oAuth->setAuthorizationEndpoint("https://atlauncher.com/oauth/authorize");
+            $service->oAuth->setAccessTokenEndpoint("https://atlauncher.com/oauth/token");
         }
 
         return $service;
