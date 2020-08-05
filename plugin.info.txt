@@ -1,7 +1,7 @@
 base   oauthatlauncher
 author Ryan Dowling
 email  ryan.dowling@atlauncher.com
-date   2019-06-08
+date   2020-08-05
 name   oauth plugin for ATLauncher
 desc   oAuth plugin to login via ATLauncher
-url    https://www.atlauncher.com
+url    https://atlauncher.com

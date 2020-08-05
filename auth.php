@@ -294,7 +294,13 @@ class auth_plugin_oauthatlauncher extends auth_plugin_authplain {
      * @return bool|string
      */
     protected function getUserByEmail($mail) {
-        if($this->users === null) $this->_loadUserData();
+        if($this->users === null){
+            if(is_callable([$this, '_loadUserData'])) {
+                $this->_loadUserData();
+            } else {
+                $this->loadUserData();
+            }
+        }
         $mail = strtolower($mail);
 
         foreach($this->users as $user => $uinfo) {
@@ -395,7 +401,7 @@ class auth_plugin_oauthatlauncher extends auth_plugin_authplain {
 
         if(isset($changes['mail'])) {
             $found = $this->getUserByEmail($changes['mail']);
-            if($found != $user) {
+            if($found && $found != $user) {
                 msg($this->getLang('emailduplicate'), -1);
                 return false;
             }
